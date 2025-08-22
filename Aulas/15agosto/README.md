@@ -1,1 +1,1 @@
-[PPT slides](https://drive.google.com/drive/folders/1YSPgvKcDsKxl2_qylGXFHlh43oDsh7J1)
+[PPT slides](https://drive.google.com/file/d/1aYeHiFLVc059234THNeKK9vRoXNl01lP/view)
