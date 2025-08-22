@@ -74,5 +74,13 @@ void maxArray1(int A[]) {
     cout << "Máximo = " << max << endl;
 }
 ```
+---
+### Crescimento Assintótico de Funções 
+O custo da solução aumenta com o tamanho *n* do problema:
+- O tempo necessário para resolver um problema cresce conforme *n* aumenta. 
+   - Exemplo: O número de comparações para encontrar o maior elemento em um vetor (array) ou para ordená-lo aumenta com o tamanho da entrada *n*.
+A escolha do algoritmo não é crítica quando *n* é pequeno, por isso, é comum analisar o comportamento das funções de custo quando *n* é grande.
+
+
 
 [PPT slides](https://drive.google.com/file/d/1aYeHiFLVc059234THNeKK9vRoXNl01lP/view)
