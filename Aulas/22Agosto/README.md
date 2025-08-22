@@ -44,13 +44,12 @@ int maxArray(int A[], int size) {
 
 Seja *f*(n) a função de complexidade:
 - *f*(n) representa o número de comparações feitas em um vector A de tamanho n. 
-- Para o algoritmo mostrado, podemos determinar que: 
-*f*(n) = n - 1, para n > 0. 
+- Para o algoritmo mostrado, podemos determinar que: ` f(n) = n - 1, para n > 0. `
 
 ---
 ### Complexidade Mínima
-*Fato*: Qualquer algoritmo que encontra o maior elemento em um conjunto de *n* elementos precisa fazer pelo menos *n* − 1 comparações.  
-*Conclusão*: Como o algoritmo *maxArray()* atinge esse limite inferior, ele é considerado um **algoritmo ótimo**.
+***Fato***: Qualquer algoritmo que encontra o maior elemento em um conjunto de *n* elementos precisa fazer pelo menos *n* − 1 comparações.  
+***Conclusão***: Como o algoritmo *maxArray()* atinge esse limite inferior, ele é considerado um **algoritmo ótimo**.
 
 Exemplo Alternativo: *Algoritmo maxArray1*
 
@@ -78,9 +77,11 @@ void maxArray1(int A[]) {
 ### Crescimento Assintótico de Funções 
 O custo da solução aumenta com o tamanho *n* do problema:
 - O tempo necessário para resolver um problema cresce conforme *n* aumenta. 
-   - Exemplo: O número de comparações para encontrar o maior elemento em um vetor (array) ou para ordená-lo aumenta com o tamanho da entrada *n*.
+   - Exemplo: O número de comparações para encontrar o maior elemento em um vetor (array) ou para ordená-lo aumenta com o tamanho da entrada *n*.  
 A escolha do algoritmo não é crítica quando *n* é pequeno, por isso, é comum analisar o comportamento das funções de custo quando *n* é grande.
 
+**Relacionamento Assintótico**   
+Definição: Uma função *g(n)* domina assintoticamente outra função *f(n)* se existem constantes positivas *c* e *m* tais que, para *n* >= *m*, temos ` |f(n)| <= c|g(n)| `
 
 
 [PPT slides](https://drive.google.com/file/d/1aYeHiFLVc059234THNeKK9vRoXNl01lP/view)
