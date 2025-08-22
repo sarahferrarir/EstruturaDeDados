@@ -3,8 +3,8 @@
 Por que analisar a complexidade de algoritmos?  
 - O principal objetivo é projetar algoritmos **eficientes**;  
 Um algoritmo pode ser desenvolvido e posteriormente analisado, mas o ideal é projetá-lo de forma eficiente desde a concepção.  
-
-## Medição da Complexidade 
+---
+### Medição da Complexidade 
 
 Questões importantes:   
 - como medir o custo de um algoritmo?   
@@ -15,7 +15,8 @@ Maneiras de medir a complexidade:
  - problema: depende do compilador, hardware e memória disponível.  
  2. Considerar um computador ideal" (conforme Donald)  
 
-## Função de Complexidade 
+---
+### Função de Complexidade 
 
 *Definição*: A função de complexidade *f*(n) mede o tempo ou espaço necessário para executar um algoritmo com entrada de tamanho n.
 - se a medida é de tempo, chamamos de **complexidade temporal**;
@@ -37,14 +38,15 @@ int maxArray(int A[], int size) {
 }
 ```
 
-**Custo de Comparações**
+#### Custo de Comparações
 
 Seja *f*(n) a função de complexidade:
 - *f*(n) representa o número de comparações feitas em um vector A de tamanho n. 
 - Para o algoritmo mostrado, podemos determinar que: 
 *f*(n) = n - 1, para n > 0. 
 
-## Complexidade Mínima
+---
+### Complexidade Mínima
 
 Exemplo Alternativo: *Algoritmo maxArray1*
 
