@@ -12,10 +12,10 @@ Questões importantes:
 
 Maneiras de medir a complexidade:  
  1. Medição direta do tempo de execução:  
- - Problema: depende do compilador, hardware e memória disponível.  
- 2. Considerar um computador ideal" (conforme Donald Knuth).
- 3. Focar nas operações mais significativas (método mais usado):
- - Exemplo: Em ordenação, contar o número de comparações.
+        - Problema: depende do compilador, hardware e memória disponível.  
+ 2. Considerar um "computador ideal" (conforme Donald Knuth);
+ 3. Focar nas operações mais significativas (método mais usado):  
+        - Exemplo: Em ordenação, contar o número de comparações.
 
 ---
 ### Função de Complexidade 
@@ -49,10 +49,8 @@ Seja *f*(n) a função de complexidade:
 
 ---
 ### Complexidade Mínima
-
-*Fato*: Qualquer algoritmo que encontra o maior elemento em um conjunto de *n* elementos precisa fazer pelo menos *n* − 1 comparações.
+*Fato*: Qualquer algoritmo que encontra o maior elemento em um conjunto de *n* elementos precisa fazer pelo menos *n* − 1 comparações.  
 *Conclusão*: Como o algoritmo *maxArray()* atinge esse limite inferior, ele é considerado um **algoritmo ótimo**.
----
 
 Exemplo Alternativo: *Algoritmo maxArray1*
 
@@ -76,3 +74,5 @@ void maxArray1(int A[]) {
     cout << "Máximo = " << max << endl;
 }
 ```
+
+[PPT slides](https://drive.google.com/file/d/1aYeHiFLVc059234THNeKK9vRoXNl01lP/view)
