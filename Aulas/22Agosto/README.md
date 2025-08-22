@@ -7,13 +7,15 @@ Um algoritmo pode ser desenvolvido e posteriormente analisado, mas o ideal é pr
 ### Medição da Complexidade 
 
 Questões importantes:   
-- como medir o custo de um algoritmo?   
+- Como medir o custo de um algoritmo?   
 - Como comparar diferentes algoritmos que resolvem o mesmo problema?  
 
 Maneiras de medir a complexidade:  
  1. Medição direta do tempo de execução:  
- - problema: depende do compilador, hardware e memória disponível.  
- 2. Considerar um computador ideal" (conforme Donald)  
+ - Problema: depende do compilador, hardware e memória disponível.  
+ 2. Considerar um computador ideal" (conforme Donald Knuth).
+ 3. Focar nas operações mais significativas (método mais usado):
+ - Exemplo: Em ordenação, contar o número de comparações.
 
 ---
 ### Função de Complexidade 
@@ -47,6 +49,10 @@ Seja *f*(n) a função de complexidade:
 
 ---
 ### Complexidade Mínima
+
+*Fato*: Qualquer algoritmo que encontra o maior elemento em um conjunto de *n* elementos precisa fazer pelo menos *n* − 1 comparações.
+*Conclusão*: Como o algoritmo *maxArray()* atinge esse limite inferior, ele é considerado um **algoritmo ótimo**.
+---
 
 Exemplo Alternativo: *Algoritmo maxArray1*
 
