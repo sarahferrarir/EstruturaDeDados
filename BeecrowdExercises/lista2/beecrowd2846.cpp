@@ -1,35 +1,25 @@
-// Title: Fibonot
-
-#include <iostream>
-#include <vector>
+#include <iostream> 
 using namespace std;
 
 int main() {
-    int K;
-    cin >> K;
-
-    vector<long long> fib = {1, 1};
-    while (fib.back() <= 2 * K) { 
-        fib.push_back(fib[fib.size()-1] + fib[fib.size()-2]);
-    }
-
-    int count = 0;  
-    long long num = 1;
-    size_t fib_index = 0;
-    long long fib_current = fib[fib_index];
+    long long K;
+    cin >> K; 
+    
+    long long f1 = 1;
+    long long f2 = 2;
 
     while (true) {
-        if (num == fib_current) {
-            fib_index++;
-            fib_current = fib_index < fib.size() ? fib[fib_index] : -1;
+        long long f3 = f1 + f2;        
+        long long gap = f3 - f2 - 1;   
+
+        if (K > gap) {                 
+            K -= gap;                  
+            f1 = f2;                   
+            f2 = f3;
         } else {
-            count++;
-            if (count == K) {
-                cout << num << endl;
-                break;
-            }
+            cout << (f2 + K) << endl; 
+            break;
         }
-        num++;
     }
 
     return 0;
