@@ -1,4 +1,4 @@
-// Título: Escolha Difícil
+// Title: Escolha Difícil
 
 #include <iostream>
 using namespace std;
