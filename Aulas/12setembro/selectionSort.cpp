@@ -13,7 +13,11 @@ void selectionSort(vector<int>& arr) {
         }
         
         if (menor != i) {
-        swap(arr[i], arr[menor]);
+        // swap(arr[i], arr[menor]);
+        // Sem a função swap: 
+            int k = arr[i];
+            arr[i] = arr[menor];
+            arr[menor] = k;
         }
     }
 }
