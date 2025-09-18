@@ -1,8 +1,8 @@
 1)a) Verdadeira.  
-b)   
+b) Falso.   
 c) Verdadeira.  
 d) Verdadeira.     
-e)  
+e) Falso.   
 
 2)  
 
