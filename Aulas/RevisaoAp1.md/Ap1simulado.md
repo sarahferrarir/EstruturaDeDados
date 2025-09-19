@@ -60,79 +60,36 @@ Responda às perguntas abaixo com base na análise de complexidade de algoritmos
 
 **(c)** Implemente os dois algoritmos para o cálculo do fatorial (iterativo e recursivo).
 
-Recursivo:
 ```cpp
 #include<iostream>
 using namespace std;
 
-int fatorial(int x) {
+int fatorialRecursivo(int x) {
     if (x == 0) {
         return 1;
     }
 
-    return fatorial(x - 1) * x;
-```
+    return fatorialRecursivo(x - 1) * x;
+}
 
-Iterativo:
-```cpp
-#include<iostream>
-using namespace std;
+int fatorialIterativo(int x) {
+    long long fat = 1;
 
-int fatorial(int x) {
-    while (x > 0) {
-        return x =* (x - 1);
+    for (int i = 2; i <= x; ++i) {
+        fat *= i; 
     }
+    
+    return fat;
+}
 
 int main () {
-   cout << fatorial(5) << endl;
-
-   return 0;
-}
-```
-
-
-```cpp
-#include <iostream>
-
-// Algoritmo Iterativo
-long long fatorialIterativo(int n) {
-    // Fatorial de 0 e 1 é 1.
-    if (n < 0) {
-        return -1; // Ou lançar uma exceção para números negativos
-    }
-    if (n == 0 || n == 1) {
-        return 1;
-    }
-
-    long long resultado = 1;
-    for (int i = 2; i <= n; ++i) {
-        resultado *= i;
-    }
-    return resultado;
-}
-
-// Algoritmo Recursivo
-long long fatorialRecursivo(int n) {
-    // Caso base: o ponto de parada da recursão
-    if (n == 0 || n == 1) {
-        return 1;
-    }
-    // Caso recursivo: a chamada para a função com um problema menor
-    return n * fatorialRecursivo(n - 1);
-}
-
-int main() {
-    int numero = 5;
-
-    // Teste do algoritmo iterativo
-    std::cout << "Fatorial de " << numero << " (iterativo) = " << fatorialIterativo(numero) << std::endl;
-
-    // Teste do algoritmo recursivo
-    std::cout << "Fatorial de " << numero << " (recursivo) = " << fatorialRecursivo(numero) << std::endl;
-
+    cout << fatorialRecursivo(5) << endl;
+    cout << fatorialIterativo(5) << endl;
+ 
     return 0;
 }
 ```
+
 --- 
 **5.** (1 Pontos) Determine a complexidade de tempo do código abaixo e explique.
 
@@ -143,6 +100,7 @@ void func (int n ) {
     }
 }
 ```
+- Terá complexidade de O(n), pois o algoritmo executa um loop for, que terá n interações. Logo, sua complexidade temporal será linear ao tamanho da entrada.
 --- 
 
 **6.**(1.5 Pontos ) Considere o seguinte código em C++ que realiza a multiplicação de duas matrizes A e B, ambas de dimensão n × n:
@@ -160,8 +118,12 @@ void multiplica ( int A [][100] , int B [][100] , int C [][100] , int n ) {
 ```
 
 **(a)** Qual é a complexidade temporal do algoritmo de multiplicação de matrizes implementado no código acima?  
+- Tem complexidade de O(nˆ3), pois existem 3 loops no algoritmo, um dentro do outro. Ou seja, para cada 1 iteração do loop externo, o do meio executa n vezes, e, igualmente, para 1 iteração do loop do meio, o mais interno também executará n vezes. Logo, o tempo total será de n * n * n   ->   O(nˆ3).
+
+
 **(b)** Se as matrizes fossem de dimensões `n * m` e `m * p`, como a complexidade seria afetada?  
 **(c)** Explique o que aconteceria com se n dobrasse. Como isso impactaria o número total de operações?
+- O algoritmo ficaria 8 vezes maior. A complexidade original é O(nˆ3), se n dobrasse, ficaria O((2n)ˆ3), que é equivalente a O(8nˆ3).
 
 # 2 Ordenação
 **(a)** (1 Ponto) Implemente um algoritmo de ordenação qualquer (a sua escolha) e ordene o seguinte vetor:   
