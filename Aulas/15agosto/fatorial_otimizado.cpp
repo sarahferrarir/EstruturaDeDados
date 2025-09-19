@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
+
 long long int fatorial[100001];
+
 long long int fat(int x){
     if(x == 0){ //caso base
         fatorial[x] = 1;
