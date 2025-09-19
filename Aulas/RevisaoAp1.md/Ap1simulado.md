@@ -1,0 +1,133 @@
+# 1 Complexidade de Algoritmos
+**1.** (2.5 Pontos) Determine se as afirmações abaixo são verdadeiras (V) ou falsas (F) em relação à
+álise de complexidade de algoritmos:
+
+**(a)** A notação O(f(n)) representa um limite superior assintótico para o tempo de execução de um algoritmo. 
+- (Verdadeiro)
+
+
+**(b)** O tempo de execução de um algoritmo com complexidade O(nˆ3) é sempre maior do que o de um algoritmo com complexidade O(n), independentemente do tamanho de n. 
+- (Falso)
+
+
+**(c)** O pior caso de um algoritmo representa o cenário em que o tempo de execução é maximizado para o tamanho da entrada considerada. 
+- (Verdadeiro)
+
+
+**(d)** O tempo de execução de um algoritmo com complexidade O(1) é constante, independentemente do tamanho da entrada.
+- (Verdadeiro)
+
+
+**(e)** Para dois algoritmos A e B, se A tem complexidade O(nlogn) e B tem complexidade O(nˆ2), então A será mais rápido que B para todos os valores de n. 
+- (Falso)
+--- 
+
+**2.** (1 Ponto) Algoritmos e Estrutura de Dados   
+Considere um vetor ordenado em ordem crescente com tamanho teoricamente infinito, ou seja, não é possível determinar diretamente seu tamanho ou seu último índice válido. Seu objetivo é desenvolver um algoritmo eficiente para encontrar a posição (índice) de um determinado valor nesse vetor. Assuma que o acesso a qualquer posição do vetor retorna o valor naquela posição caso a posição exista, ou retorna um valor especial indicando que a posição é inválida (por exemplo, infinito).
+
+**a)** Descreva claramente a lógica e o funcionamento do algoritmo proposto.  
+**b)** Implemente, utilizando pseudocódigo, o algoritmo descrito na letra (a).  
+**c)** Determine a complexidade computacional do algoritmo proposto em termos de tempo, justificando sua resposta.  
+> Observação: O algoritmo proposto deve ser mais eficiente do que simplesmente percorrer sequencialmente o vetor elemento por elemento.
+---
+
+**3.** (1 Ponto) O que significa dizer que um algoritmo tem complexidade de tempo O(nˆ3)?  
+> Dica: Demonstre o crescimento da função e compare com outras funções de complexidade de tempo.  
+
+- Significa que a complexidade de tempo é equivalente ao cubo do tamanho de entrada. Por exemplo, em um algoritmo com O(n), o maior tempo possível sempre será proporcional ao tamanho da entrada, enquanto o O(nˆ3) demorará n * n * n (n ao cubo), ou seja, é muito menos eficiente.
+---
+**4.** (1 Ponto) Considere o problema de calcular o fatorial de um número n, definido como:  
+`n! = n × (n − 1) × (n − 2) × · · · × 1`  
+Responda às perguntas abaixo com base na análise de complexidade de algoritmos para o cálculo do fatorial:  
+
+
+**(a)** Qual é a complexidade temporal do algoritmo iterativo que calcula o fatorial de n?
+- A complexidade temporal do algoritmo iterativo para calcular o fatorial de n é O(n) (leitura: "ordem de n"). Isso acontece porque o algoritmo executa um laço de repetição, como um for ou while, que vai de 1 até n (ou de n até 1). A cada iteração, ele realiza um número constante de operações (uma multiplicação). Como o número de iterações é diretamente proporcional ao valor de n, a complexidade do tempo de execução é linear em relação a n.
+
+**(b)** Existe uma diferença de complexidade entre o algoritmo iterativo e o recursivo para calcular o fatorial? Explique.
+- Não há diferença na complexidade temporal entre o algoritmo iterativo e o recursivo para o cálculo do fatorial. Ambos possuem complexidade O(n). No entanto, há uma diferença significativa na complexidade de espaço (memória) e no desempenho prático:
+- Algoritmo Iterativo: A complexidade de espaço é O(1) (constante). Ele utiliza apenas algumas variáveis para armazenar o resultado e o contador do laço, independentemente do valor de n. Não há chamadas de função adicionais que consomem memória na pilha de chamadas.
+- Algoritmo Recursivo: A complexidade de espaço é O(n). Cada chamada recursiva ao fatorial(n-1) cria um novo quadro na pilha de chamadas para armazenar os parâmetros e variáveis locais. Para calcular o fatorial de n, a função é chamada n vezes, empilhando n quadros. Isso pode levar a um erro de "stack overflow" (estouro de pilha) para valores grandes de n, pois a memória da pilha é limitada.
+Em resumo, embora a complexidade temporal seja a mesma, o algoritmo iterativo é mais eficiente em termos de uso de memória e geralmente tem um desempenho um pouco melhor na prática devido à sobrecarga das chamadas de função recursivas.
+
+**(c)** Implemente os dois algoritmos para o cálculo do fatorial (iterativo e recursivo).
+
+```cpp
+#include <iostream>
+
+// Algoritmo Iterativo
+long long fatorialIterativo(int n) {
+    // Fatorial de 0 e 1 é 1.
+    if (n < 0) {
+        return -1; // Ou lançar uma exceção para números negativos
+    }
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+
+    long long resultado = 1;
+    for (int i = 2; i <= n; ++i) {
+        resultado *= i;
+    }
+    return resultado;
+}
+
+// Algoritmo Recursivo
+long long fatorialRecursivo(int n) {
+    // Caso base: o ponto de parada da recursão
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+    // Caso recursivo: a chamada para a função com um problema menor
+    return n * fatorialRecursivo(n - 1);
+}
+
+int main() {
+    int numero = 5;
+
+    // Teste do algoritmo iterativo
+    std::cout << "Fatorial de " << numero << " (iterativo) = " << fatorialIterativo(numero) << std::endl;
+
+    // Teste do algoritmo recursivo
+    std::cout << "Fatorial de " << numero << " (recursivo) = " << fatorialRecursivo(numero) << std::endl;
+
+    return 0;
+}
+```
+--- 
+**5.** (1 Pontos) Determine a complexidade de tempo do código abaixo e explique.
+
+```cpp
+void func (int n ) {
+    for (int i = 1; i < n ; i *= 2) {
+        std :: cout << i << std :: endl ;
+    }
+}
+```
+--- 
+
+**6.**(1.5 Pontos ) Considere o seguinte código em C++ que realiza a multiplicação de duas matrizes A e B, ambas de dimensão n × n:
+```cpp
+void multiplica ( int A [][100] , int B [][100] , int C [][100] , int n ) {
+    for (int i = 0; i < n ; i ++) {
+        for (int j = 0; j < n ; j ++) {
+            C [ i ][ j ] = 0;
+            for (int k = 0; k < n ; k ++) {
+                C [ i ][ j ] += A [ i ][ k ] * B [ k ][ j ];
+            }
+        }
+    }
+}
+```
+
+**(a)** Qual é a complexidade temporal do algoritmo de multiplicação de matrizes implementado no código acima?  
+**(b)** Se as matrizes fossem de dimensões `n * m` e `m * p`, como a complexidade seria afetada?  
+**(c)** Explique o que aconteceria com se n dobrasse. Como isso impactaria o número total de operações?
+
+# 2 Ordenação
+**(a)** (1 Ponto) Implemente um algoritmo de ordenação qualquer (a sua escolha) e ordene o seguinte vetor:   
+`3, −1, 2, 5, 12, 7, 5, 4, 9, −3;`   
+Demonstre passo a passo e explique a complexidade do algoritmo escolhido.
+
+--- 
+**(b)** (1 Ponto) Descreva em que circunstâncias é mais vantajoso escolher o Selection Sort em vez do Bubble Sort ou do Insertion Sort. Comente sobre os motivos dessa escolha.
