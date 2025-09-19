@@ -1,3 +1,7 @@
+// Ideia principal: comparar pares de elementos adjacentes e trocar se estiverem na ordem errada.
+// A cada passada, o maior elemento “borbulha” para o final do array.
+// Complexidade: O(n²) no pior e médio caso, O(n) no melhor caso (quando o array já está ordenado e você otimiza parando cedo).
+// Uso: Simples de entender, mas pouco eficiente para grandes listas.
 #include <iostream>
 using namespace std;
 
