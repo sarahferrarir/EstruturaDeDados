@@ -4,22 +4,27 @@
 
 **(a)** A notação O(f(n)) representa um limite superior assintótico para o tempo de execução de um algoritmo. 
 - (Verdadeiro)
+- Por exemplo, um algoritmo com complexidade de O(nˆ2), levará, no pior caso, o quadrado de sua entrada.
 
 
 **(b)** O tempo de execução de um algoritmo com complexidade O(nˆ3) é sempre maior do que o de um algoritmo com complexidade O(n), independentemente do tamanho de n. 
 - (Falso)
+- A afirmação é falsa pois não podemos afirmar isso sem saber o tamanho de n, por exemplo, se a entrada do algoritmo O(nˆ3) for pequena e a de O(n) for grande, (por exemplo, 2 e 100 respectivamente) então O(n) será maior.
 
 
 **(c)** O pior caso de um algoritmo representa o cenário em que o tempo de execução é maximizado para o tamanho da entrada considerada. 
 - (Verdadeiro)
+- Pois quando calculamos a complexidade de tempo, é essencial saber qual seria o tempo máximo que o algoritmo poderia levar, ou seja, qual seria o pior caso.
 
 
 **(d)** O tempo de execução de um algoritmo com complexidade O(1) é constante, independentemente do tamanho da entrada.
 - (Verdadeiro)
+- Pois a complexidade O(1) não tem relação com a entrada, sempre será 1. 
 
 
 **(e)** Para dois algoritmos A e B, se A tem complexidade O(nlogn) e B tem complexidade O(nˆ2), então A será mais rápido que B para todos os valores de n. 
 - (Falso)
+- Apesar do algoritmo O(nlogn) ser mais rápido e eficiente do que O(nˆ2), isso não significa que ele será mais rápido para todos os valores de n.  
 --- 
 
 **2.** (1 Ponto) Algoritmos e Estrutura de Dados   
@@ -36,19 +41,22 @@ Considere um vetor ordenado em ordem crescente com tamanho teoricamente infinito
 
 - Significa que a complexidade de tempo é equivalente ao cubo do tamanho de entrada. Por exemplo, em um algoritmo com O(n), o maior tempo possível sempre será proporcional ao tamanho da entrada, enquanto o O(nˆ3) demorará n * n * n (n ao cubo), ou seja, é muito menos eficiente.
 ---
+
 **4.** (1 Ponto) Considere o problema de calcular o fatorial de um número n, definido como:  
 `n! = n × (n − 1) × (n − 2) × · · · × 1`  
 Responda às perguntas abaixo com base na análise de complexidade de algoritmos para o cálculo do fatorial:  
 
 
 **(a)** Qual é a complexidade temporal do algoritmo iterativo que calcula o fatorial de n?
-- A complexidade temporal do algoritmo iterativo para calcular o fatorial de n é O(n) (leitura: "ordem de n"). Isso acontece porque o algoritmo executa um laço de repetição, como um for ou while, que vai de 1 até n (ou de n até 1). A cada iteração, ele realiza um número constante de operações (uma multiplicação). Como o número de iterações é diretamente proporcional ao valor de n, a complexidade do tempo de execução é linear em relação a n.
+- O(n) pois o algoritmo executa o loop n vezes, mesmo tendo uma multiplicação em cada iteração, isso não afeta a complexidade de tempo, o que afeta é o número de iterações. Por isso a complexidade será de O(n), pois leva tempo proporcional ao tamanho da entrada.
 
 **(b)** Existe uma diferença de complexidade entre o algoritmo iterativo e o recursivo para calcular o fatorial? Explique.
-- Não há diferença na complexidade temporal entre o algoritmo iterativo e o recursivo para o cálculo do fatorial. Ambos possuem complexidade O(n). No entanto, há uma diferença significativa na complexidade de espaço (memória) e no desempenho prático:
-- Algoritmo Iterativo: A complexidade de espaço é O(1) (constante). Ele utiliza apenas algumas variáveis para armazenar o resultado e o contador do laço, independentemente do valor de n. Não há chamadas de função adicionais que consomem memória na pilha de chamadas.
-- Algoritmo Recursivo: A complexidade de espaço é O(n). Cada chamada recursiva ao fatorial(n-1) cria um novo quadro na pilha de chamadas para armazenar os parâmetros e variáveis locais. Para calcular o fatorial de n, a função é chamada n vezes, empilhando n quadros. Isso pode levar a um erro de "stack overflow" (estouro de pilha) para valores grandes de n, pois a memória da pilha é limitada.
-Em resumo, embora a complexidade temporal seja a mesma, o algoritmo iterativo é mais eficiente em termos de uso de memória e geralmente tem um desempenho um pouco melhor na prática devido à sobrecarga das chamadas de função recursivas.
+- Não tem diferença de tempo, os dois levariam O(n). Mas existe diferença na complexidade de espaço. O algoritmo iterativo é mais eficiente, pois usa menos memória e normalmente tem um desempenho melhor do que o recursivo também. 
+> Não há diferença na complexidade temporal entre o algoritmo iterativo e o recursivo para o cálculo do fatorial. Ambos possuem complexidade O(n). No entanto, há uma diferença significativa na complexidade de espaço (memória) e no desempenho prático:  
+> - Algoritmo Iterativo: A complexidade de espaço é O(1) (constante). Ele utiliza apenas algumas variáveis para armazenar o resultado e o contador do laço, independentemente do valor de n. Não há chamadas de função adicionais que consomem memória na pilha de chamadas.  
+> - Algoritmo Recursivo: A complexidade de espaço é O(n). Cada chamada recursiva ao fatorial(n-1) cria um novo quadro na pilha de chamadas para armazenar os parâmetros e variáveis locais. Para calcular o fatorial de n, a função é chamada n vezes, empilhando n quadros. Isso pode levar a um erro de "stack overflow" (estouro de pilha) para valores grandes de n, pois a memória da pilha é limitada.
+
+> Em resumo, embora a complexidade temporal seja a mesma, o algoritmo iterativo é mais eficiente em termos de uso de memória e geralmente tem um desempenho um pouco melhor na prática devido à sobrecarga das chamadas de função recursivas.
 
 **(c)** Implemente os dois algoritmos para o cálculo do fatorial (iterativo e recursivo).
 
