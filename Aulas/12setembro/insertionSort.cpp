@@ -1,3 +1,7 @@
+// Ideia principal: constrói a parte ordenada do array gradualmente.
+// Para cada elemento, insere-o na posição correta da porção já ordenada, deslocando elementos maiores para a direita.
+// Complexidade: O(n²) no pior caso, mas O(n) se o array já estiver quase ordenado.
+// Uso: Muito bom para arrays pequenos ou quase ordenados. É estável e in-place.
 #include<iostream>
 #include<vector>
 using namespace std;
