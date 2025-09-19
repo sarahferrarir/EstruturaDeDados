@@ -60,6 +60,37 @@ Responda às perguntas abaixo com base na análise de complexidade de algoritmos
 
 **(c)** Implemente os dois algoritmos para o cálculo do fatorial (iterativo e recursivo).
 
+Recursivo:
+```cpp
+#include<iostream>
+using namespace std;
+
+int fatorial(int x) {
+    if (x == 0) {
+        return 1;
+    }
+
+    return fatorial(x - 1) * x;
+```
+
+Iterativo:
+```cpp
+#include<iostream>
+using namespace std;
+
+int fatorial(int x) {
+    while (x > 0) {
+        return x =* (x - 1);
+    }
+
+int main () {
+   cout << fatorial(5) << endl;
+
+   return 0;
+}
+```
+
+
 ```cpp
 #include <iostream>
 
