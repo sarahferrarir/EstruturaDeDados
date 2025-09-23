@@ -1,9 +1,8 @@
 // Title: Bakugan
-
 #include <iostream>
 using namespace std;
 
-int first_triple(const int v[], int n) {
+int firstTriple(const int v[], int n) {
     for (int i = 2; i < n; i++) {
         if (v[i] == v[i-1] && v[i-1] == v[i-2]) {
             return i; 
@@ -28,12 +27,12 @@ int main() {
             sumL += L[i];
         }
 
-        int mIdx = first_triple(M, R);
-        int lIdx = first_triple(L, R);
+        int mark = firstTriple(M, R);
+        int leti = firstTriple(L, R);
 
-        if (mIdx != -1 && (lIdx == -1 || mIdx < lIdx)) {
+        if (mark != -1 && (leti == -1 || mark < leti)) {
             sumM += 30;
-        } else if (lIdx != -1 && (mIdx == -1 || lIdx < mIdx)) {
+        } else if (leti != -1 && (mark == -1 || leti < mark)) {
             sumL += 30;
         }
 
