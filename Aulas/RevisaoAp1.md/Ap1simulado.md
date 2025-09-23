@@ -31,8 +31,93 @@
 Considere um vetor ordenado em ordem crescente com tamanho teoricamente infinito, ou seja, não é possível determinar diretamente seu tamanho ou seu último índice válido. Seu objetivo é desenvolver um algoritmo eficiente para encontrar a posição (índice) de um determinado valor nesse vetor. Assuma que o acesso a qualquer posição do vetor retorna o valor naquela posição caso a posição exista, ou retorna um valor especial indicando que a posição é inválida (por exemplo, infinito).
 
 **a)** Descreva claramente a lógica e o funcionamento do algoritmo proposto.  
+- Como é um vetor ordenado, o ideal seria utilizar Busca Binária, mas para isso preciso saber os limites do vetor. Então antes disso, vou desenvolver um algoritmo para encontrar o intervalo necessário para busca binária. Em etapas:
+    - começar com um índice pequeno;
+    - verificar se o valor está dentro do intervalo, se não está, dobrar o índice para aumentar o tamanho do intervalo;
+    - loop que continua dobrando o índice, até que seu valor seja maior do que valor que quero encontrar;
+    - determina então que o valor está no intervalo entre índice anterior e o último índice do loop.
+- Depois de obter esse intervalo, aplico o algoritmo de busca binária, ou seja, um loop que divide o intervalo no meio até encontrar o valor desejado, ou determinar que ele não existe no vetor.
+
+
 **b)** Implemente, utilizando pseudocódigo, o algoritmo descrito na letra (a).  
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// 1 passo: Definir uma constante para simular o valor "infinito"
+const int INFINITY_VAL = 2147483647;
+
+// 2 passo: declarar o vetor que simula o vetor "infinito".
+vector<int> vetorInfinito = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41};
+
+// 3 passo: Função que simula o acesso a um vetor infinito.
+int acessar(int indice) {
+    if (indice >= vetorInfinito.size()) {
+        return INFINITY_VAL; // Retorna nosso valor de infinito
+    }
+    return vetorInfinito[indice];
+}
+
+// 4 passo: Implementar a Busca Binária em um intervalo específico
+int buscaBinaria(int inicio, int fim, int valor) {
+    while (inicio <= fim) {
+        int meio = inicio + (fim - inicio) / 2;
+        int valorDoMeio = acessar(meio);
+
+        if (valorDoMeio == valor) {
+            return meio;
+        } else if (valorDoMeio < valor) {
+            inicio = meio + 1;
+        } else {
+            fim = meio - 1;
+        }
+    }
+    return -1;
+}
+
+// 5 passo: Algoritmo principal que encontra a posição do valor
+int encontrarPosicao(int valor) {
+    if (acessar(0) == valor) {
+        return 0;
+    }
+
+    // Etapa 1: Busca Exponencial para encontrar o intervalo
+    int indice = 1;
+    while (acessar(indice) < valor) {
+        indice *= 2;
+    }
+
+    // Etapa 2: Aplica a Busca Binária no intervalo encontrado
+    return buscaBinaria(indice / 2, indice, valor);
+}
+
+int main() {
+    int valorBuscado = 27;
+    int resultado = encontrarPosicao(valorBuscado);
+
+    if (resultado != -1) {
+        cout << "O valor " << valorBuscado << " foi encontrado no indice " << resultado << "." << endl;
+    } else {
+        cout << "O valor " << valorBuscado << " nao foi encontrado." << endl;
+    }
+
+    int valorNaoEncontrado = 10;
+    resultado = encontrarPosicao(valorNaoEncontrado);
+
+    if (resultado != -1) {
+        cout << "O valor " << valorNaoEncontrado << " foi encontrado no indice " << resultado << "." << endl;
+    } else {
+        cout << "O valor " << valorNaoEncontrado << " nao foi encontrado." << endl;
+    }
+
+    return 0;
+}
+```
 **c)** Determine a complexidade computacional do algoritmo proposto em termos de tempo, justificando sua resposta.  
+- Esse algoritmo é a junção de dois algoritmos com complexidade de tempo de O(logn). Como a busca exponencial está sempre dobrando o índice, e a binária divindo o intervalo no meio, a complexidade é logarítmica em relação à n.
+- Então, o algoritmo completo teria a complexidade de O(2logn), mas na notação big O, constantes são ignoradas, ficando apenas como - O(logn). 
+
 > Observação: O algoritmo proposto deve ser mais eficiente do que simplesmente percorrer sequencialmente o vetor elemento por elemento.
 ---
 
@@ -48,7 +133,7 @@ Responda às perguntas abaixo com base na análise de complexidade de algoritmos
 
 
 **(a)** Qual é a complexidade temporal do algoritmo iterativo que calcula o fatorial de n?
-- O(n) pois o algoritmo executa o loop n vezes, mesmo tendo uma multiplicação em cada iteração, isso não afeta a complexidade de tempo, o que afeta é o número de iterações. Por isso a complexidade será de O(n), pois leva tempo proporcional ao tamanho da entrada.
+- O(n), pois o algoritmo executa o loop n vezes. Mesmo tendo uma multiplicação em cada iteração, isso não afeta a complexidade de tempo, o que afeta é o número de iterações. Por isso a complexidade será de O(n), pois leva tempo proporcional ao tamanho da entrada.
 
 **(b)** Existe uma diferença de complexidade entre o algoritmo iterativo e o recursivo para calcular o fatorial? Explique.
 - Não tem diferença de tempo, os dois levariam O(n). Mas existe diferença na complexidade de espaço. O algoritmo iterativo é mais eficiente, pois usa menos memória e normalmente tem um desempenho melhor do que o recursivo também. 
@@ -122,6 +207,9 @@ void multiplica ( int A [][100] , int B [][100] , int C [][100] , int n ) {
 
 
 **(b)** Se as matrizes fossem de dimensões `n * m` e `m * p`, como a complexidade seria afetada?  
+- A complexidade para a multiplicação de uma matriz A de dimensão n×m por uma matriz B de dimensão m×p seria O(n×m×p). O algoritmo de multiplicação de matrizes exige que o número de colunas da primeira matriz (m) seja igual ao número de linhas da segunda (m), resultando em uma matriz C de dimensão n×p.
+- A complexidade é calculada multiplicando o número de iterações de cada laço, resultando em n×p×m.
+
 **(c)** Explique o que aconteceria com se n dobrasse. Como isso impactaria o número total de operações?
 - O algoritmo ficaria 8 vezes maior. A complexidade original é O(nˆ3), se n dobrasse, ficaria O((2n)ˆ3), que é equivalente a O(8nˆ3).
 
