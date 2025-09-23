@@ -133,7 +133,7 @@ Responda às perguntas abaixo com base na análise de complexidade de algoritmos
 
 
 **(a)** Qual é a complexidade temporal do algoritmo iterativo que calcula o fatorial de n?
-- O(n) pois o algoritmo executa o loop n vezes, mesmo tendo uma multiplicação em cada iteração, isso não afeta a complexidade de tempo, o que afeta é o número de iterações. Por isso a complexidade será de O(n), pois leva tempo proporcional ao tamanho da entrada.
+- O(n), pois o algoritmo executa o loop n vezes. Mesmo tendo uma multiplicação em cada iteração, isso não afeta a complexidade de tempo, o que afeta é o número de iterações. Por isso a complexidade será de O(n), pois leva tempo proporcional ao tamanho da entrada.
 
 **(b)** Existe uma diferença de complexidade entre o algoritmo iterativo e o recursivo para calcular o fatorial? Explique.
 - Não tem diferença de tempo, os dois levariam O(n). Mas existe diferença na complexidade de espaço. O algoritmo iterativo é mais eficiente, pois usa menos memória e normalmente tem um desempenho melhor do que o recursivo também. 
@@ -207,6 +207,9 @@ void multiplica ( int A [][100] , int B [][100] , int C [][100] , int n ) {
 
 
 **(b)** Se as matrizes fossem de dimensões `n * m` e `m * p`, como a complexidade seria afetada?  
+- A complexidade para a multiplicação de uma matriz A de dimensão n×m por uma matriz B de dimensão m×p seria O(n×m×p). O algoritmo de multiplicação de matrizes exige que o número de colunas da primeira matriz (m) seja igual ao número de linhas da segunda (m), resultando em uma matriz C de dimensão n×p.
+- A complexidade é calculada multiplicando o número de iterações de cada laço, resultando em n×p×m.
+
 **(c)** Explique o que aconteceria com se n dobrasse. Como isso impactaria o número total de operações?
 - O algoritmo ficaria 8 vezes maior. A complexidade original é O(nˆ3), se n dobrasse, ficaria O((2n)ˆ3), que é equivalente a O(8nˆ3).
 
