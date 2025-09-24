@@ -185,7 +185,7 @@ void func (int n ) {
     }
 }
 ```
-- Terá complexidade de O(n), pois o algoritmo executa um loop for, que terá n interações. Logo, sua complexidade temporal será linear ao tamanho da entrada.
+- Terá complexidade de O(n), pois o algoritmo executa um loop for, que terá n iterações. Logo, sua complexidade temporal será linear ao tamanho da entrada.
 --- 
 
 **6.**(1.5 Pontos ) Considere o seguinte código em C++ que realiza a multiplicação de duas matrizes A e B, ambas de dimensão n × n:
