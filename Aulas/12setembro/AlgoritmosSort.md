@@ -61,53 +61,64 @@ int main() {
 #include <vector>
 using namespace std;
 
-void merge(vector<int>& arr, int l, int m, int r) {
-    int n1 = m - l + 1, n2 = r - m;
-    vector<int> L(n1), R(n2);
+// Função merge recebe o vetor como referência
+void merge(vector<int>& arr, int left, int mid, int right) {
+    vector<int> temp;
+    int i = left, j = mid + 1;
 
-    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
-    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
-
-    int i = 0, j = 0, k = l;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) arr[k++] = L[i++];
-        else arr[k++] = R[j++];
+    // Combina os dois subvetores ordenadamente
+    while (i <= mid && j <= right) {
+        if (arr[i] < arr[j])
+            temp.push_back(arr[i++]);
+        else
+            temp.push_back(arr[j++]);
     }
-    while (i < n1) arr[k++] = L[i++];
-    while (j < n2) arr[k++] = R[j++];
+
+    // Copia o restante de cada subvetor
+    while (i <= mid) temp.push_back(arr[i++]);
+    while (j <= right) temp.push_back(arr[j++]);
+
+    // Copia de volta para o vetor original
+    for (int k = left; k <= right; ++k)
+        arr[k] = temp[k - left];
 }
 
-void mergeSort(vector<int>& arr, int l, int r) {
-    if (l < r) {
-        int m = l + (r - l) / 2;
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
-        merge(arr, l, m, r);
-    }
+// Função recursiva mergeSort
+void mergeSort(vector<int>& arr, int left, int right) {
+    if (left >= right) return; // caso base
+    int mid = left + (right - left) / 2;
+    mergeSort(arr, left, mid);       // ordena metade esquerda
+    mergeSort(arr, mid + 1, right);  // ordena metade direita
+    merge(arr, left, mid, right);    // combina as duas metades
 }
 
 int main() {
-    vector<int> arr = {9, 3, 4, 1, 7, 6};
+    vector<int> arr = {4, 10, 3, 5, 1};
+
     mergeSort(arr, 0, arr.size() - 1);
 
     for (int x : arr) cout << x << " ";
     cout << endl;
+
     return 0;
 }
+
 ```
 
 ## 3. Quick Sort
+
 ```cpp
 #include <iostream>
 #include <vector>
 using namespace std;
 
+// Função partition recebe o vetor como referência
 int partition(vector<int>& arr, int low, int high) {
-    int pivot = arr[high]; 
+    int pivot = arr[high];
     int i = low - 1;
 
     for (int j = low; j < high; j++) {
-        if (arr[j] <= pivot) {
+        if (arr[j] < pivot) {
             i++;
             swap(arr[i], arr[j]);
         }
@@ -116,16 +127,18 @@ int partition(vector<int>& arr, int low, int high) {
     return i + 1;
 }
 
+// Função recursiva quickSort
 void quickSort(vector<int>& arr, int low, int high) {
     if (low < high) {
-        int pi = partition(arr, low, high);
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+        int pi = partition(arr, low, high); // partição
+        quickSort(arr, low, pi - 1);        // esquerda
+        quickSort(arr, pi + 1, high);       // direita
     }
 }
 
 int main() {
-    vector<int> arr = {9, 3, 4, 1, 7, 6};
+    vector<int> arr = {4, 10, 3, 5, 1};
+
     quickSort(arr, 0, arr.size() - 1);
 
     for (int x : arr) cout << x << " ";
