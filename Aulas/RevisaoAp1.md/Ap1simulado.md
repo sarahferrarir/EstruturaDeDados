@@ -219,4 +219,5 @@ void multiplica ( int A [][100] , int B [][100] , int C [][100] , int n ) {
 Demonstre passo a passo e explique a complexidade do algoritmo escolhido.
 
 --- 
-**(b)** (1 Ponto) Descreva em que circunstâncias é mais vantajoso escolher o Selection Sort em vez do Bubble Sort ou do Insertion Sort. Comente sobre os motivos dessa escolha.
+**(b)** (1 Ponto) Descreva em que circunstâncias é mais vantajoso escolher o Selection Sort em vez do Bubble Sort ou do Insertion Sort. Comente sobre os motivos dessa escolha.  
+- É mais vantajoso usar o Selection Sort quando o custo de troca é alto e/ou tiver restrições de memória. Pois, em comparação com o Bubble e o Insertion Sort, o Selection é o que terá o menor número de trocas. 
