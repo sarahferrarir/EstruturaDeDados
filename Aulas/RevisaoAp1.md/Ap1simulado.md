@@ -39,79 +39,33 @@ Considere um vetor ordenado em ordem crescente com tamanho teoricamente infinito
 
 
 **b)** Implemente, utilizando pseudocódigo, o algoritmo descrito na letra (a).  
-```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
+```
+Algoritmo BuscaEmVetorInfinito(vetor, valor):
 
-// 1 passo: Definir uma constante para simular o valor "infinito"
-const int INFINITY_VAL = 2147483647;
+    // Etapa 1: Encontrar intervalo
+    índice ← 1
+    enquanto vetor[índice] ≠ infinito E vetor[índice] < valor faça
+        índice ← índice * 2
+    fim enquanto
 
-// 2 passo: declarar o vetor que simula o vetor "infinito".
-vector<int> vetorInfinito = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41};
+    esquerda ← índice / 2
+    direita ← índice
 
-// 3 passo: Função que simula o acesso a um vetor infinito.
-int acessar(int indice) {
-    if (indice >= vetorInfinito.size()) {
-        return INFINITY_VAL; // Retorna nosso valor de infinito
-    }
-    return vetorInfinito[indice];
-}
+    // Etapa 2: Busca Binária no intervalo [esquerda, direita]
+    enquanto esquerda ≤ direita faça
+        meio ← (esquerda + direita) / 2
 
-// 4 passo: Implementar a Busca Binária em um intervalo específico
-int buscaBinaria(int inicio, int fim, int valor) {
-    while (inicio <= fim) {
-        int meio = inicio + (fim - inicio) / 2;
-        int valorDoMeio = acessar(meio);
+        se vetor[meio] = valor então
+            retornar meio
+        senão se vetor[meio] > valor OU vetor[meio] = infinito então
+            direita ← meio - 1
+        senão
+            esquerda ← meio + 1
+        fim se
+    fim enquanto
 
-        if (valorDoMeio == valor) {
-            return meio;
-        } else if (valorDoMeio < valor) {
-            inicio = meio + 1;
-        } else {
-            fim = meio - 1;
-        }
-    }
-    return -1;
-}
+    retornar "não encontrado"
 
-// 5 passo: Algoritmo principal que encontra a posição do valor
-int encontrarPosicao(int valor) {
-    if (acessar(0) == valor) {
-        return 0;
-    }
-
-    // Etapa 1: Busca Exponencial para encontrar o intervalo
-    int indice = 1;
-    while (acessar(indice) < valor) {
-        indice *= 2;
-    }
-
-    // Etapa 2: Aplica a Busca Binária no intervalo encontrado
-    return buscaBinaria(indice / 2, indice, valor);
-}
-
-int main() {
-    int valorBuscado = 27;
-    int resultado = encontrarPosicao(valorBuscado);
-
-    if (resultado != -1) {
-        cout << "O valor " << valorBuscado << " foi encontrado no indice " << resultado << "." << endl;
-    } else {
-        cout << "O valor " << valorBuscado << " nao foi encontrado." << endl;
-    }
-
-    int valorNaoEncontrado = 10;
-    resultado = encontrarPosicao(valorNaoEncontrado);
-
-    if (resultado != -1) {
-        cout << "O valor " << valorNaoEncontrado << " foi encontrado no indice " << resultado << "." << endl;
-    } else {
-        cout << "O valor " << valorNaoEncontrado << " nao foi encontrado." << endl;
-    }
-
-    return 0;
-}
 ```
 **c)** Determine a complexidade computacional do algoritmo proposto em termos de tempo, justificando sua resposta.  
 - Esse algoritmo é a junção de dois algoritmos com complexidade de tempo de O(logn). Como a busca exponencial está sempre dobrando o índice, e a binária divindo o intervalo no meio, a complexidade é logarítmica em relação à n.
