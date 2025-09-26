@@ -1,6 +1,5 @@
 # 1 Complexidade de Algoritmos
-**1.** (2.5 Pontos) Determine se as afirmações abaixo são verdadeiras (V) ou falsas (F) em relação à
-álise de complexidade de algoritmos:
+**1.** (2.5 Pontos) Determine se as afirmações abaixo são verdadeiras (V) ou falsas (F) em relação à análise de complexidade de algoritmos:
 
 **(a)** A notação O(f(n)) representa um limite superior assintótico para o tempo de execução de um algoritmo. 
 - (Verdadeiro)
@@ -217,7 +216,55 @@ void multiplica ( int A [][100] , int B [][100] , int C [][100] , int n ) {
 **(a)** (1 Ponto) Implemente um algoritmo de ordenação qualquer (a sua escolha) e ordene o seguinte vetor:   
 `3, −1, 2, 5, 12, 7, 5, 4, 9, −3;`   
 Demonstre passo a passo e explique a complexidade do algoritmo escolhido.
+```cpp
+// Ideia principal: em cada iteração, procura o menor elemento no restante do array e coloca-o na posição correta trocando com o elemento atual.
+// A cada passo, a parte inicial do array fica ordenada.
+// Complexidade: sempre O(n²), independentemente da ordem inicial.
+// Uso: Simples de implementar, mas menos eficiente do que insertion sort em casos práticos.
+#include<iostream>
+#include<vector>
+using namespace std;
+
+// Função para ordenar o vetor usando Selection Sort
+void selectionSort(vector<int>& arr) {
+    // Loop externo: percorre cada posição do vetor até a penúltima
+    for (int i = 0; i < arr.size(); i++) {
+        int menor = i; // Assume que o menor elemento está na posição atual (i)
+        
+        // Loop interno: procura o menor elemento no restante do vetor
+        for (int j = i + 1; j < arr.size(); j++){
+            if (arr[j] < arr[menor]){  // Se encontrar um elemento menor
+                menor = j;             // Atualiza a posição do menor
+            }
+        }
+        
+        // Se o menor elemento não estiver na posição correta (i), faz a troca
+        if (menor != i) {
+            // swap(arr[i], arr[menor]);  // Outra forma de trocar
+            // Implementando a troca manualmente:
+            int k = arr[i];        // Guarda o valor de arr[i] em uma variável temporária
+            arr[i] = arr[menor];   // Coloca o valor do menor na posição i
+            arr[menor] = k;        // Coloca o valor temporário na posição do menor
+        }
+    }
+}
+
+int main() {
+    // Declara e inicializa um vetor com 5 elementos
+    vector<int> num = {3, -1, 2, 5, 12, 7, 5, 4, 9, -3};
+
+    // Chama a função de ordenação
+    selectionSort(num);
+
+    // Imprime o vetor já ordenado
+    cout << "Array ordenado:  ";
+    for (int n : num) cout << n << ", ";  // Percorre e imprime cada elemento
+    cout << endl;
+
+    return 0; 
+}
+```
 
 --- 
 **(b)** (1 Ponto) Descreva em que circunstâncias é mais vantajoso escolher o Selection Sort em vez do Bubble Sort ou do Insertion Sort. Comente sobre os motivos dessa escolha.  
-- É mais vantajoso usar o Selection Sort quando o custo de troca é alto e/ou tiver restrições de memória. Pois, em comparação com o Bubble e o Insertion Sort, o Selection é o que terá o menor número de trocas. 
+- É mais vantajoso usar o Selection Sort quando o custo de troca é alto e/ou tiver restrições de memória. Pois, em comparação com o Bubble e o Insertion Sort, o Selection é o que terá o menor número de trocas (n - 1). 
