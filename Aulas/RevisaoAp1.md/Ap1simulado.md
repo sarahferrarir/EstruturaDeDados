@@ -1,6 +1,5 @@
 # 1 Complexidade de Algoritmos
-**1.** (2.5 Pontos) Determine se as afirmações abaixo são verdadeiras (V) ou falsas (F) em relação à
-álise de complexidade de algoritmos:
+**1.** (2.5 Pontos) Determine se as afirmações abaixo são verdadeiras (V) ou falsas (F) em relação à análise de complexidade de algoritmos:
 
 **(a)** A notação O(f(n)) representa um limite superior assintótico para o tempo de execução de um algoritmo. 
 - (Verdadeiro)
@@ -40,79 +39,33 @@ Considere um vetor ordenado em ordem crescente com tamanho teoricamente infinito
 
 
 **b)** Implemente, utilizando pseudocódigo, o algoritmo descrito na letra (a).  
-```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
+```
+Algoritmo BuscaEmVetorInfinito(vetor, valor):
 
-// 1 passo: Definir uma constante para simular o valor "infinito"
-const int INFINITY_VAL = 2147483647;
+    // Etapa 1: Encontrar intervalo
+    índice ← 1
+    enquanto vetor[índice] ≠ infinito E vetor[índice] < valor faça
+        índice ← índice * 2
+    fim enquanto
 
-// 2 passo: declarar o vetor que simula o vetor "infinito".
-vector<int> vetorInfinito = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41};
+    esquerda ← índice / 2
+    direita ← índice
 
-// 3 passo: Função que simula o acesso a um vetor infinito.
-int acessar(int indice) {
-    if (indice >= vetorInfinito.size()) {
-        return INFINITY_VAL; // Retorna nosso valor de infinito
-    }
-    return vetorInfinito[indice];
-}
+    // Etapa 2: Busca Binária no intervalo [esquerda, direita]
+    enquanto esquerda ≤ direita faça
+        meio ← (esquerda + direita) / 2
 
-// 4 passo: Implementar a Busca Binária em um intervalo específico
-int buscaBinaria(int inicio, int fim, int valor) {
-    while (inicio <= fim) {
-        int meio = inicio + (fim - inicio) / 2;
-        int valorDoMeio = acessar(meio);
+        se vetor[meio] = valor então
+            retornar meio
+        senão se vetor[meio] > valor OU vetor[meio] = infinito então
+            direita ← meio - 1
+        senão
+            esquerda ← meio + 1
+        fim se
+    fim enquanto
 
-        if (valorDoMeio == valor) {
-            return meio;
-        } else if (valorDoMeio < valor) {
-            inicio = meio + 1;
-        } else {
-            fim = meio - 1;
-        }
-    }
-    return -1;
-}
+    retornar "não encontrado"
 
-// 5 passo: Algoritmo principal que encontra a posição do valor
-int encontrarPosicao(int valor) {
-    if (acessar(0) == valor) {
-        return 0;
-    }
-
-    // Etapa 1: Busca Exponencial para encontrar o intervalo
-    int indice = 1;
-    while (acessar(indice) < valor) {
-        indice *= 2;
-    }
-
-    // Etapa 2: Aplica a Busca Binária no intervalo encontrado
-    return buscaBinaria(indice / 2, indice, valor);
-}
-
-int main() {
-    int valorBuscado = 27;
-    int resultado = encontrarPosicao(valorBuscado);
-
-    if (resultado != -1) {
-        cout << "O valor " << valorBuscado << " foi encontrado no indice " << resultado << "." << endl;
-    } else {
-        cout << "O valor " << valorBuscado << " nao foi encontrado." << endl;
-    }
-
-    int valorNaoEncontrado = 10;
-    resultado = encontrarPosicao(valorNaoEncontrado);
-
-    if (resultado != -1) {
-        cout << "O valor " << valorNaoEncontrado << " foi encontrado no indice " << resultado << "." << endl;
-    } else {
-        cout << "O valor " << valorNaoEncontrado << " nao foi encontrado." << endl;
-    }
-
-    return 0;
-}
 ```
 **c)** Determine a complexidade computacional do algoritmo proposto em termos de tempo, justificando sua resposta.  
 - Esse algoritmo é a junção de dois algoritmos com complexidade de tempo de O(logn). Como a busca exponencial está sempre dobrando o índice, e a binária divindo o intervalo no meio, a complexidade é logarítmica em relação à n.
@@ -185,7 +138,7 @@ void func (int n ) {
     }
 }
 ```
-- Terá complexidade de O(n), pois o algoritmo executa um loop for, que terá n iterações. Logo, sua complexidade temporal será linear ao tamanho da entrada.
+- O(logn). O loop executa um número de iterações proporcional ao logaritmo de n, pois o valor de i cresce exponencialmente (multiplicando por 2 a cada passo).
 --- 
 
 **6.**(1.5 Pontos ) Considere o seguinte código em C++ que realiza a multiplicação de duas matrizes A e B, ambas de dimensão n × n:
@@ -217,7 +170,55 @@ void multiplica ( int A [][100] , int B [][100] , int C [][100] , int n ) {
 **(a)** (1 Ponto) Implemente um algoritmo de ordenação qualquer (a sua escolha) e ordene o seguinte vetor:   
 `3, −1, 2, 5, 12, 7, 5, 4, 9, −3;`   
 Demonstre passo a passo e explique a complexidade do algoritmo escolhido.
+```cpp
+// Ideia principal: em cada iteração, procura o menor elemento no restante do array e coloca-o na posição correta trocando com o elemento atual.
+// A cada passo, a parte inicial do array fica ordenada.
+// Complexidade: sempre O(n²), independentemente da ordem inicial.
+// Uso: Simples de implementar, mas menos eficiente do que insertion sort em casos práticos.
+#include<iostream>
+#include<vector>
+using namespace std;
+
+// Função para ordenar o vetor usando Selection Sort
+void selectionSort(vector<int>& arr) {
+    // Loop externo: percorre cada posição do vetor até a penúltima
+    for (int i = 0; i < arr.size(); i++) {
+        int menor = i; // Assume que o menor elemento está na posição atual (i)
+        
+        // Loop interno: procura o menor elemento no restante do vetor
+        for (int j = i + 1; j < arr.size(); j++){
+            if (arr[j] < arr[menor]){  // Se encontrar um elemento menor
+                menor = j;             // Atualiza a posição do menor
+            }
+        }
+        
+        // Se o menor elemento não estiver na posição correta (i), faz a troca
+        if (menor != i) {
+            // swap(arr[i], arr[menor]);  // Outra forma de trocar
+            // Implementando a troca manualmente:
+            int k = arr[i];        // Guarda o valor de arr[i] em uma variável temporária
+            arr[i] = arr[menor];   // Coloca o valor do menor na posição i
+            arr[menor] = k;        // Coloca o valor temporário na posição do menor
+        }
+    }
+}
+
+int main() {
+    // Declara e inicializa um vetor com 5 elementos
+    vector<int> num = {3, -1, 2, 5, 12, 7, 5, 4, 9, -3};
+
+    // Chama a função de ordenação
+    selectionSort(num);
+
+    // Imprime o vetor já ordenado
+    cout << "Array ordenado:  ";
+    for (int n : num) cout << n << ", ";  // Percorre e imprime cada elemento
+    cout << endl;
+
+    return 0; 
+}
+```
 
 --- 
 **(b)** (1 Ponto) Descreva em que circunstâncias é mais vantajoso escolher o Selection Sort em vez do Bubble Sort ou do Insertion Sort. Comente sobre os motivos dessa escolha.  
-- É mais vantajoso usar o Selection Sort quando o custo de troca é alto e/ou tiver restrições de memória. Pois, em comparação com o Bubble e o Insertion Sort, o Selection é o que terá o menor número de trocas. 
+- É mais vantajoso usar o Selection Sort quando o custo de troca é alto e/ou tiver restrições de memória. Pois, em comparação com o Bubble e o Insertion Sort, o Selection é o que terá o menor número de trocas (n - 1). 
