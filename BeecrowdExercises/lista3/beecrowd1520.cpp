@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
     int N;
-    while (cin >> N) { /
+    while (cin >> N) { 
         vector<int> shelf;
         
         for (int i = 0; i < N; i++) {

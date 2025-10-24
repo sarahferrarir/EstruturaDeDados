@@ -4,11 +4,11 @@
 #include <iostream>
 using namespace std;
 
-int fibo(int n) {
+int fib(int n) {
     if (n <= 1) {
         return n;
     }
-    return fibo(n - 1) + fibo(n - 2);
+    return fib(n - 1) + fib(n - 2);
 }
 
 int main() {
@@ -16,7 +16,7 @@ int main() {
     cout << "Posição n: ";
     cin >> n;
 
-    cout << "Fibonacci de " << n << " é " << fibo(n) << endl;
+    cout << "Fibonacci de " << n << " é " << fib(n) << endl;
 
     return 0;
 }
