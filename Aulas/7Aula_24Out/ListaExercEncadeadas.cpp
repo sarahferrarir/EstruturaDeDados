@@ -300,3 +300,119 @@ void ListaEncadeada::reverterListaRecursivamente() {
     // Inicia a recursão e armazena o novo primeiro nó (a antiga cauda) em Head->prox
     Head->prox = reverterRecursivo(Head->prox, nullptr);
 }
+
+// -----------------------------------------------------
+// EXERCÍCIOS DESAFIADORES
+// -----------------------------------------------------
+
+// 1. Palíndromo:
+// Verifica se os elementos da lista formam um palíndromo usando uma Pilha (Stack).
+bool ListaEncadeada::verificarPalindromo() {
+    // Para resolver o problema, usamos uma Pilha (Stack)
+    std::stack<int> s; 
+    
+    No* ponteiroLento = Head->prox;
+    No* ponteiroRapido = Head->prox;
+
+    // 1. Usa o método dos dois ponteiros (lento/rápido) para encontrar o meio e 
+    //    empilhar a primeira metade.
+    while (ponteiroRapido != nullptr && ponteiroRapido->prox != nullptr) {
+        s.push(ponteiroLento->dado);
+        ponteiroLento = ponteiroLento->prox;
+        ponteiroRapido = ponteiroRapido->prox->prox;
+    }
+
+    // Se a lista tiver número ímpar de elementos, avança o ponteiro lento em 1 
+    // (pulando o elemento central).
+    if (ponteiroRapido != nullptr) {
+        ponteiroLento = ponteiroLento->prox;
+    }
+
+    // 2. Compara a segunda metade da lista com os elementos desempilhados
+    while (ponteiroLento != nullptr) {
+        int topo = s.top();
+        s.pop();
+
+        if (ponteiroLento->dado != topo) {
+            return false; // Não é palíndromo
+        }
+        ponteiroLento = ponteiroLento->prox;
+    }
+
+    return true; // É um palíndromo
+}
+
+// 2. Remover Elementos em Posições Específicas:
+// Implementa um método que remove elementos das posições especificadas (base 1).
+void ListaEncadeada::removerEmPosicoes(const vector<int>& posicoes) {
+    vector<int> posicoesOrdenadas = posicoes;
+    sort(posicoesOrdenadas.rbegin(), posicoesOrdenadas.rend());
+
+    // NOTA: A complexidade piora muito aqui pois contarElementos() é O(N).
+    int ultimoTamanho = contarElementos();
+
+    for (int n : posicoesOrdenadas) {
+        if (n < 1 || n > ultimoTamanho) {
+            continue;
+        }
+        
+        No* p = Head;
+        for (int i = 0; i < n - 1; ++i) {
+            p = p->prox;
+        }
+
+        No* remover = p->prox;
+        p->prox = remover->prox;
+        delete remover;
+        
+        ultimoTamanho--;
+    }
+}
+
+// 3. Detectar Ciclos:
+// Implementa um método que verifica se a lista contém um ciclo (Algoritmo de Floyd).
+bool ListaEncadeada::detectarCiclos() {
+    No* lento = Head->prox; 
+    No* rapido = Head->prox;
+
+    while (rapido != nullptr && rapido->prox != nullptr) {
+        lento = lento->prox; // Avança 1
+        rapido = rapido->prox->prox; // Avança 2
+
+        if (lento == rapido) {
+            return true; // Ciclo detectado (encontro dos ponteiros)
+        }
+    }
+
+    return false; // Fim da lista alcançado, sem ciclo
+}
+
+// 4. Dividir a Lista em Duas Metades:
+// Escreve uma função que divide a lista encadeada em duas metades.
+ListaEncadeada* ListaEncadeada::dividirEmDuasMetades() {
+    // Lista vazia ou com um elemento
+    if (Head->prox == nullptr || Head->prox->prox == nullptr) {
+        return new ListaEncadeada(); 
+    }
+
+    // Pointers para encontrar o nó ANTERIOR ao ponto de divisão.
+    No* p = Head; // Ponteiro lento (parará no fim da primeira metade)
+    No* rapido = Head->prox; // Ponteiro rápido
+
+    // 1. Encontra o ponto de divisão (p irá parar no nó anterior ao início da segunda metade)
+    while (rapido != nullptr && rapido->prox != nullptr) {
+        p = p->prox;
+        rapido = rapido->prox->prox;
+    }
+
+    // 2. Cria a nova lista para a segunda metade
+    ListaEncadeada* segundaMetade = new ListaEncadeada();
+    
+    // O nó seguinte a 'p' é o início da segunda metade
+    segundaMetade->Head->prox = p->prox;
+
+    // 3. Termina a primeira metade (lista original)
+    p->prox = nullptr; 
+
+    return segundaMetade;
+}
