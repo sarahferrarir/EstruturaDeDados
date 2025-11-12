@@ -4,36 +4,26 @@
 // Estrutura de Dados - Lista 3 : Listas Encadeadas
 // -----------------------------------------------------
 
-// Estrutura de cada nó na lista
+// Classe que representa um nó da lista
 class No {
 public:
     int dado;
     No* prox;
-    
-    // Construtor
-    No(int d = 0, No* p = nullptr): dado(d), prox(p) {}
+
+    // Construtor: inicializa o valor e o ponteiro
+    No(int valor = 0) {
+        dado = valor;
+        prox = nullptr;
+    }
 };
 
-// Estrutura da Lista Encadeada (com nó cabeça)
+// Classe que representa a lista encadeada simples
 class ListaEncadeada {
-private:
-    No* inicio; // Ponteiro para o nó cabeça
-    
 public:
-    // Construtor: Inicializa a lista com o nó cabeça
-    ListaEncadeada() {
-        inicio = new No(0); 
-        inicio->prox = nullptr;
-    }
+    No* Head; // nó cabeça (não armazena dado útil)
 
-    // Destrutor: Libera todos os nós para evitar memory leak
-    ~ListaEncadeada() {
-        No* p = inicio;
-        while (p != nullptr) {
-            No* temp = p;
-            p = p->prox;
-            delete temp;
-        }
+    ListaEncadeada() {
+        this->Head = new No(); // cria o nó cabeça
     }
 };
 
@@ -46,7 +36,7 @@ public:
 int ListaEncadeada::contarElementos() {
     int contador = 0;
     // Começa do primeiro nó útil (após a cabeça)
-    No* p = inicio->prox; 
+    No* p = Head->prox; 
     
     while (p != nullptr) {
         contador++;
@@ -59,7 +49,7 @@ int ListaEncadeada::contarElementos() {
 // Crie um método que busque um elemento na lista e retorne true se ele existir ou false caso contrário.
 bool ListaEncadeada::buscarElemento(int x) {
     // Começa do primeiro nó útil (após a cabeça)
-    No* p = inicio->prox; 
+    No* p = Head->prox; 
     
     while (p != nullptr) {
         if (p->dado == x) {
@@ -75,7 +65,7 @@ bool ListaEncadeada::buscarElemento(int x) {
 void ListaEncadeada::inverterLista() {
     // Três ponteiros auxiliares para a inversão
     No* anterior = nullptr;
-    No* atual = inicio->prox; // Começa do primeiro nó útil
+    No* atual = Head->prox; // Começa do primeiro nó útil
     No* proximo = nullptr;
 
     // 1. Inverte os ponteiros 'prox' de cada nó
@@ -87,14 +77,14 @@ void ListaEncadeada::inverterLista() {
     }
     
     // 2. O nó cabeça deve apontar para o novo primeiro elemento (o 'anterior' final)
-    inicio->prox = anterior;
+    Head->prox = anterior;
 }
 
 // 4. Adicionar ao Fim:
 // Modifique a classe para adicionar um novo método que insira um elemento no final da lista.
 void ListaEncadeada::adicionarAoFim(int x) {
     // Ponteiro para percorrer a lista
-    No* p = inicio; 
+    No* p = Head; 
     
     // Percorre a lista até encontrar o último nó (aquele cujo 'prox' é nullptr)
     while (p->prox != nullptr) {
