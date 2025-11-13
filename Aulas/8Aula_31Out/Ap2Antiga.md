@@ -40,7 +40,7 @@ A remoção só é $O(1)$ se já tivermos o ponteiro para o nó (ou o nó anteri
 - (d) A busca por um elemento na lista possui complexidade $O(n)$ no pior caso. (CORRETA).  
 
 É necessário percorrer toda a lista se o elemento não for encontrado ou se for o último.   
-- (e) Inserir um elemento em uma posição intermediária na lista requer encontrar a posição primeiro, o que pode adicionar uma complexidade de $O(n)$ no pior caso. (CORRETA).
+- (e) Inserir um elemento em uma posição intermediária na lista requer encontrar a posição primeiro, o que pode adicionar uma complexidade de $O(n)$ no pior caso. (CORRETA).   
 A operação de inserção em si é $O(1)$, mas a busca torna a operação total $O(N)$.
 
 ---
@@ -79,7 +79,7 @@ No pior caso (elemento não existe ou é o último), o método deve visitar todo
 - (c) Comportamento do removerLista(int x) se o nó não for encontrado e melhorias
 
 O que aconteceria se um nó não for encontrado: Se o valor x não for encontrado, o laço while terminará quando p se tornar o nó head (p != head será falso, embora o código fornecido esteja confuso). 
-A linha if (p != head) (linha 1560) será falsa, e o código sairá do método sem tentar liberar memória, o que está correto (não causa erro de memória, mas é ineficiente na busca).
+A linha if (p != head) será falsa, e o código sairá do método sem tentar liberar memória, o que está correto (não causa erro de memória, mas é ineficiente na busca).
 
 O que poderia ser melhorado para tornar o método mais eficiente: O método percorre a lista duas vezes: uma no while (para encontrar o nó) e uma implicitamente no percurso de p = p->prox que está fora do while. 
 A melhoria de eficiência não está na complexidade (que é $O(N)$), mas sim na implementação e clareza do código C++: o percurso e a busca devem estar contidos em um único laço.
